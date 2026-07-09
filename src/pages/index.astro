@@ -1,0 +1,94 @@
+---
+import Aiworld from '../layouts/Aiworld.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+const articles = (await getCollection('clanky_en')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const CAT_LABEL: Record<string, string> = {
+  'ai-zaklady': 'Foundations',
+  'ai-v-praxi': 'In practice',
+  'ai-trendy': 'Trends',
+};
+const CAT_COLOR: Record<string, string> = {
+  'ai-zaklady': 'var(--ai-cyan)',
+  'ai-v-praxi': 'var(--ai-green)',
+  'ai-trendy': 'var(--ai-violet)',
+};
+---
+
+<Aiworld title="AI World — curated AI expertise" skHref={base}>
+  <section class="hero">
+    <p class="eyebrow">◆ THE HIVE, IN ENGLISH</p>
+    <h1>Original AI thinking — <span class="grad">curated for the world.</span></h1>
+    <p class="lede">
+      A hand-picked English selection from <a href="https://aisvet.sk/">aisvet.sk</a> — the
+      pieces where we say something of our own: cognitive partnership, agentic
+      systems, the third space. Not a mirror. A best-of.
+    </p>
+  </section>
+
+  {articles.length === 0 ? (
+    <p class="empty">Translations in progress — check back shortly.</p>
+  ) : (
+    <section class="grid">
+      {articles.map((a) => (
+        <a class="card" href={`${base}/${a.id}/`}>
+          <span class="card-cat" style={`color:${CAT_COLOR[a.data.category]}`}>
+            {CAT_LABEL[a.data.category] ?? a.data.category}
+          </span>
+          <h2>{a.data.title}</h2>
+          {a.data.description && <p class="card-desc">{a.data.description}</p>}
+          <span class="card-go">Read →</span>
+        </a>
+      ))}
+    </section>
+  )}
+</Aiworld>
+
+<style>
+  .hero { padding: 72px 0 40px; max-width: 760px; }
+  .eyebrow {
+    font-family: var(--font-mono, monospace); font-size: 12px; letter-spacing: 0.08em;
+    color: var(--ai-violet); margin: 0 0 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-heading, 'Geist', sans-serif); font-weight: 800;
+    font-size: clamp(34px, 5vw, 52px); line-height: 1.05; letter-spacing: -0.02em;
+    color: var(--ink-100); margin: 0 0 22px;
+  }
+  .grad {
+    background: linear-gradient(135deg, var(--ai-violet), var(--ai-cyan));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { font-size: 18px; line-height: 1.6; color: var(--ink-400); margin: 0; }
+  .lede a { color: var(--ai-cyan); text-decoration: none; }
+  .empty {
+    font-family: var(--font-mono, monospace); color: var(--ink-600);
+    padding: 60px 0; text-align: center;
+  }
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px; padding: 24px 0 0;
+  }
+  .card {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 26px; border-radius: 16px; text-decoration: none;
+    background: var(--carbon, #111118);
+    border: 1px solid var(--glass-border, rgba(255,255,255,0.06));
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--ai-violet); }
+  .card-cat {
+    font-family: var(--font-mono, monospace); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .card h2 {
+    font-family: var(--font-heading, 'Geist', sans-serif); font-weight: 700;
+    font-size: 20px; line-height: 1.25; color: var(--ink-100); margin: 0;
+  }
+  .card-desc { font-size: 14px; line-height: 1.55; color: var(--ink-400); margin: 0; flex: 1; }
+  .card-go { font-family: var(--font-mono, monospace); font-size: 13px; color: var(--ai-cyan); }
+</style>

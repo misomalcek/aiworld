@@ -1,0 +1,304 @@
+/**
+ * AI Svet — Design Tokens (Cyber Hive v3)
+ * --------------------------------------------------------------
+ * Single source of truth. Imported by Base.astro + BaseNext.astro
+ * via `<link rel="stylesheet">` or `<style is:global>` @import.
+ *
+ * Tokens mirror the Claude Design handoff (ai-svet-design-system).
+ * Editorial / scientific variants are exploratory, NOT shipped here.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* ─── Backgrounds (dark surface ramp) ─────────────────────── */
+  --void:     #0A0A0F;
+  --carbon:   #111118;
+  --graphite: #18182A;
+  --slate:    #27273A;
+
+  /* ─── Light/editorial surfaces (under-hero, glossary, about) ── */
+  --paper:        #faf9f7;
+  --paper-warm:   #f7f7f5;
+  --paper-cool:   #f0eee9;
+  --paper-line:   #e8e6e1;
+  --paper-soft:   #d3cfc7;
+  --paper-mid:    #9d9485;
+  --paper-deep:   #514a42;
+  --paper-ink:    #1f2052;
+  --paper-jet:    #28241f;
+  --paper-accent: #c9553d;
+
+  /* ─── Ink (text) ramp — neutral, slightly cool ────────────── */
+  --ink-100:  #F4F4F5;
+  --ink-200:  #E4E4E7;
+  --ink-400:  #A1A1AA;
+  --ink-600:  #52525B;
+  --ink-800:  #1F1F23;
+  --ink-950:  #0A0A0A;
+
+  /* ─── Accent palette — the "AI" colors ────────────────────── */
+  --ai-violet: #8B5CF6;
+  --ai-cyan:   #06B6D4;
+  --ai-pink:   #EC4899;
+  --ai-green:  #22C55E;
+  --ai-purple: #A78BFA;
+
+  /* ─── Glass + glow ────────────────────────────────────────── */
+  --glass-bg:      rgba(24, 24, 40, 0.27);
+  --glass-border:  rgba(255, 255, 255, 0.05);
+  --glow-violet:   rgba(139, 92, 246, 0.40);
+  --glow-cyan:     rgba(6, 182, 212, 0.40);
+
+  /* ─── Borders + tints ─────────────────────────────────────── */
+  --border-subtle:      #1E1E3A;
+  --cyber-tint:         rgba(139, 92, 246, 0.03);
+  --cyber-tint-strong:  rgba(139, 92, 246, 0.07);
+
+  /* ─── Semantic aliases ─────────────────────────────────────── */
+  --color-bg:             var(--void);
+  --color-surface:        var(--carbon);
+  --color-surface-raised: var(--graphite);
+  --color-border:         var(--border-subtle);
+  --color-text:           var(--ink-100);
+  --color-text-muted:     var(--ink-400);
+  --color-text-tertiary:  #71717A;
+  --color-accent:         var(--ai-violet);
+  --color-accent-hover:   var(--ai-purple);
+  --color-success:        var(--ai-green);
+  --color-info:           var(--ai-cyan);
+
+  /* ─── Category colors (3 article categories) ──────────────── */
+  --cat-zaklady: var(--ai-cyan);
+  --cat-prax:    var(--ai-green);
+  --cat-trendy:  var(--ai-violet);
+
+  /* ─── Content-type colors (article / podcast / video / infographic) ── */
+  --ct-article:    #3B82F6;
+  --ct-podcast:    #A855F7;
+  --ct-video:      #EF4444;
+  --ct-infographic:#10B981;
+
+  /* ─── Cluster gradients (14 series, lifted from clusters.js) ─── */
+  --cluster-treti:     linear-gradient(135deg, #8B5CF6, #6366F1);
+  --cluster-zaklady:   linear-gradient(135deg, #3B82F6, #06B6D4);
+  --cluster-profesie:  linear-gradient(135deg, #10B981, #14B8A6);
+  --cluster-nastroje:  linear-gradient(135deg, #F97316, #F59E0B);
+  --cluster-images:    linear-gradient(135deg, #EC4899, #F43F5E);
+  --cluster-claude:    linear-gradient(135deg, #F59E0B, #F97316);
+  --cluster-trendy:    linear-gradient(135deg, #6366F1, #3B82F6);
+  --cluster-copilot:   linear-gradient(135deg, #0EA5E9, #3B82F6);
+  --cluster-praca:     linear-gradient(135deg, #84CC16, #22C55E);
+  --cluster-slovensko: linear-gradient(135deg, #3B82F6, #EF4444);
+  --cluster-prompt:    linear-gradient(135deg, #D946EF, #A855F7);
+  --cluster-chatgpt:   linear-gradient(135deg, #22C55E, #10B981);
+  --cluster-agenti:    linear-gradient(135deg, #8B5CF6, #6366F1);
+  --cluster-llm:       linear-gradient(135deg, #06B6D4, #3B82F6);
+
+  /* ─── Typography stacks ───────────────────────────────────── */
+  --font-heading: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:    'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Menlo', monospace;
+
+  /* Editorial alternates — magazine feel for long-form / glossary surfaces. */
+  --font-serif-display: 'Playfair Display', 'Geist', 'Georgia', serif;
+  --font-serif-body:    'Source Sans 3', 'Inter', system-ui, sans-serif;
+
+  /* ─── Type scale ──────────────────────────────────────────── */
+  --fs-display:  clamp(36px, 7vw, 72px);
+  --fs-h1:       clamp(28px, 4vw, 44px);
+  --fs-h2:       clamp(24px, 3.5vw, 36px);
+  --fs-h3:       20px;
+  --fs-h4:       18px;
+  --fs-body:     15px;
+  --fs-body-lg:  17px;
+  --fs-small:    13px;
+  --fs-mono:     12px;
+  --fs-tag:      11px;
+  --fs-tag-xs:   9px;
+
+  --lh-tight:    1.05;
+  --lh-snug:     1.15;
+  --lh-normal:   1.6;
+  --lh-prose:    1.8;
+
+  --tracking-display: -0.03em;
+  --tracking-h2:      -0.02em;
+  --tracking-body:    0;
+  --tracking-eyebrow: 0.08em;
+  --tracking-tag:     0.06em;
+  --tracking-mono:    0.02em;
+
+  /* ─── Spacing scale ───────────────────────────────────────── */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  40px;
+  --space-xl:  64px;
+  --space-2xl: 96px;
+
+  /* ─── Radius ──────────────────────────────────────────────── */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 9999px;
+
+  /* ─── Elevation / shadow ──────────────────────────────────── */
+  --shadow-card:              0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-pop:               0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-glow-violet:       0 0 32px rgba(139, 92, 246, 0.18);
+  --shadow-glow-cyan:         0 0 32px rgba(6, 182, 212, 0.18);
+  --shadow-btn-primary:       0 4px 16px rgba(139, 92, 246, 0.30);
+  --shadow-btn-primary-hover: 0 8px 24px rgba(139, 92, 246, 0.40);
+
+  /* ─── Motion ──────────────────────────────────────────────── */
+  --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:      150ms;
+  --dur-base:      250ms;
+  --dur-slow:      400ms;
+}
+
+/* ─── Base body styles ──────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: var(--lh-normal);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { color: var(--color-accent-hover); }
+
+code, pre { font-family: var(--font-mono); }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+main { min-height: 60vh; }
+section { padding: var(--space-xl) 0; }
+
+/* ─── Grid helpers ──────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+@media (max-width: 900px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ─── Semantic helpers (per design handoff) ─────────────────── */
+.ds-display {
+  font-family: var(--font-heading);
+  font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  color: var(--ink-100);
+}
+
+.ds-h1 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-display);
+  color: var(--ink-100);
+}
+
+.ds-h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-h2);
+  color: var(--ink-100);
+}
+
+.ds-h3 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink-100);
+}
+
+.ds-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--ink-400);
+}
+
+.ds-body-lg {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-normal);
+  color: var(--ink-400);
+}
+
+.ds-prose {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: var(--lh-prose);
+  color: var(--ink-400);
+}
+
+.ds-eyebrow {
+  /* ◆ SECTION mono eyebrow */
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--ai-violet);
+}
+
+.ds-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  color: var(--ink-400);
+  letter-spacing: var(--tracking-mono);
+}
+
+.ds-tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-tag);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tag);
+}
+
+.ds-gradient-text {
+  background: linear-gradient(135deg, var(--ai-violet), var(--ai-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ─── Pulse dot (status indicator) ──────────────────────────── */
+.ds-pulse-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ai-green);
+  box-shadow: 0 0 8px var(--ai-green);
+  animation: ds-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ds-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}

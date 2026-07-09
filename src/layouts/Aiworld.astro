@@ -1,0 +1,102 @@
+---
+/**
+ * Aiworld — layout for the curated English showcase (aiworld.aisvet.sk).
+ *
+ * Self-contained EN chrome (lang="en", own minimal nav/footer) on the shared
+ * Cyber Hive design tokens. Kept separate from BaseNext so the SK site is never
+ * bilingually entangled — one project, two clean surfaces.
+ */
+import '../styles/tokens.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Canonical SK URL of this page's source article, if any (hreflang alternate). */
+  skHref?: string;
+}
+
+const {
+  title,
+  description = 'AI World — curated AI expertise from the hive. Original thinking on agents, cognition, and the third space.',
+  skHref,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title} | AI World</title>
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+  {skHref && <link rel="alternate" hreflang="sk" href={skHref} />}
+  <link rel="alternate" hreflang="en" href={Astro.url.href} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="aw-nav">
+    <a class="aw-brand" href={`${base}en/`}>
+      <span class="aw-brand-mark">◆</span> AI <span class="aw-brand-accent">World</span>
+    </a>
+    <nav class="aw-nav-links">
+      <a href={`${base}en/`}>Articles</a>
+      <a href={base} class="aw-sk-link" title="Slovenská verzia">SK ↗</a>
+    </nav>
+  </header>
+
+  <main class="aw-main">
+    <slot />
+  </main>
+
+  <footer class="aw-footer">
+    <span>AI World — a curated English showcase of <a href={base}>aisvet.sk</a>'s expertise.</span>
+    <span class="aw-footer-motto">Non ducor, duco.</span>
+  </footer>
+
+  <style>
+    body {
+      background: var(--void);
+      color: var(--ink-400);
+      font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .aw-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1100px; margin: 0 auto; padding: 22px 24px;
+      border-bottom: 1px solid var(--glass-border, rgba(255,255,255,0.06));
+    }
+    .aw-brand {
+      font-family: var(--font-heading, 'Geist', sans-serif); font-weight: 700;
+      font-size: 19px; color: var(--ink-100); text-decoration: none; letter-spacing: -0.01em;
+    }
+    .aw-brand-mark { color: var(--ai-violet); margin-right: 2px; }
+    .aw-brand-accent {
+      background: linear-gradient(135deg, var(--ai-violet), var(--ai-cyan));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .aw-nav-links { display: flex; gap: 22px; align-items: center; }
+    .aw-nav-links a {
+      font-family: var(--font-mono, monospace); font-size: 13px; color: var(--ink-400);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .aw-nav-links a:hover { color: var(--ai-cyan); }
+    .aw-sk-link { color: var(--ink-600) !important; }
+    .aw-main { max-width: 1100px; margin: 0 auto; padding: 0 24px; min-height: 60vh; }
+    .aw-footer {
+      max-width: 1100px; margin: 64px auto 0; padding: 28px 24px;
+      border-top: 1px solid var(--glass-border, rgba(255,255,255,0.06));
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      font-family: var(--font-mono, monospace); font-size: 12px; color: var(--ink-600);
+    }
+    .aw-footer a { color: var(--ink-400); text-decoration: none; }
+    .aw-footer a:hover { color: var(--ai-violet); }
+    .aw-footer-motto { color: var(--ai-violet); opacity: 0.7; }
+  </style>
+</body>
+</html>
